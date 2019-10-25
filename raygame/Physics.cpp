@@ -112,6 +112,14 @@ void resolvePhysBodies(PhysObject & lhs, PhysObject & rhs)
 		return glm::vec2();
 	}
 	);
+
+	resolveCollision(lhs.pos, lhs.vel, lhs.mass, rhs.pos, rhs.vel, rhs.mass, 1.0, normal, resImpulses);
+
+	lhs.pos += normal * pen;
+	rhs.pos -= normal * pen;
+
+	lhs.vel = resImpulses[0];
+	rhs.vel = resImpulses[1];
 }
 
 void resolveCollision(glm::vec2 posA, glm::vec2 velA, float massA, glm::vec2 posB, glm::vec2 velB, float massB, float elasticity, glm::vec2 normal, glm::vec2 * dst)

@@ -61,8 +61,12 @@ void Game::tickPhys()
 		for (auto &j : physObjects) {
 			if (&i == &j) { continue; }
 
+			bool collision = false;
+
 			i.collider.match([i, j](circle c) { if (checkCircleX(i.pos, c, j.pos, j.collider)) { std::cout << "collision!" << std::endl; }},
 							 [i, j](aabb a) { if (checkAABBX(i.pos, a, j.pos, j.collider)) { std::cout << "collllllllision!" << std::endl; }});
+			
+			if (collision) { resolvePhysBodies(i, j); }
 		}
 	}
 }
